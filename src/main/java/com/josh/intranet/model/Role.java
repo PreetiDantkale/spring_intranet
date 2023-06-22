@@ -23,6 +23,9 @@ public class Role {
   private String name;
 
   @Column
+  private boolean active;
+
+  @Column
   private Timestamp createdAt;
 
   @Column
