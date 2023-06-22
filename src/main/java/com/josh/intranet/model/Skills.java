@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -27,6 +29,12 @@ public class Skills {
 
   @Column
   private String[] otherSkill;
+
+  @Column
+  private Timestamp createdAt;
+
+  @Column
+  private Timestamp updatedAt;
 
   @OneToOne
   private Employee employee;

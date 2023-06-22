@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -24,5 +25,11 @@ public class Project {
 
   @Column
   private boolean active;
+
+  @Column
+  private Timestamp createdAt;
+
+  @Column
+  private Timestamp updatedAt;
 
 }

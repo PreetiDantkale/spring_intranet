@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -17,6 +19,12 @@ public class EmployeeProject {
 
   @Column
   private boolean active;
+
+  @Column
+  private Timestamp createdAt;
+
+  @Column
+  private Timestamp updatedAt;
 
   @ManyToOne
   @JoinColumn(name = "employee_id")

@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import java.sql.Timestamp;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -19,5 +21,11 @@ public class Role {
   @Column
   @NonNull
   private String name;
+
+  @Column
+  private Timestamp createdAt;
+
+  @Column
+  private Timestamp updatedAt;
 
 }

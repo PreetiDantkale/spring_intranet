@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -40,6 +41,12 @@ public class PersonalDetails {
 
   @Column
   private String tShirtSize;
+
+  @Column
+  private Timestamp createdAt;
+
+  @Column
+  private Timestamp updatedAt;
 
   @OneToOne
   private Employee employee;
