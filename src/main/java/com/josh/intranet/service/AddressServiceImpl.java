@@ -38,9 +38,4 @@ public class AddressServiceImpl implements AddressService {
     address.setUpdatedAt(Timestamp.valueOf(timestamp));
     addressRepository.save(address);
   }
-
-  private
-  String createEmail(String firstName, String lastName){
-    return firstName + "." + lastName + "@josh.com";
-  }
 }
