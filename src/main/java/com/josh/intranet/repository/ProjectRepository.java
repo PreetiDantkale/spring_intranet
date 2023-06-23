@@ -1,0 +1,10 @@
+package com.josh.intranet.repository;
+
+import com.josh.intranet.model.Employee;
+import com.josh.intranet.model.Project;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ProjectRepository extends JpaRepository<Project, Long> {
+}
