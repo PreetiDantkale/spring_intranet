@@ -2,8 +2,11 @@ package com.josh.intranet.controller;
 
 import com.josh.intranet.dto.request.EmployeeProjectRequestDto;
 import com.josh.intranet.dto.request.EmployeeRequestDto;
+import com.josh.intranet.exception.ValidationException;
 import com.josh.intranet.service.EmployeeServiceImpl;
 import com.josh.intranet.service.EmployeeProjectServiceImpl;
+import com.josh.intranet.utils.ErrorUtils;
+import com.josh.intranet.utils.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -33,16 +36,11 @@ public class EmployeeController {
   public ResponseEntity<Map> createEmployee(@Validated @RequestBody EmployeeRequestDto employeeRequestDto
       , BindingResult bindingResult){
     if (bindingResult.hasErrors()) {
-      List<String> errorMessages = bindingResult.getFieldErrors().stream()
-          .map(FieldError::getDefaultMessage)
-          .collect(Collectors.toList());
-      Map<String, String> response = new HashMap<>();
-      response.put("message", errorMessages.toString());
-      return ResponseEntity.badRequest().body(response);
+      List<String> errorMessages = ErrorUtils.getErrorMessage(bindingResult);
+      throw new ValidationException(errorMessages);
     }
     employeeService.createEmployee(employeeRequestDto);
-    Map<String, String> response = new HashMap<>();
-    response.put("message", "Employee Added Successfully");
+    Map<String, String> response = ResponseUtils.createSuccessResponse("Employee Added Successfully");
     return ResponseEntity.ok().body(response);
   }
 

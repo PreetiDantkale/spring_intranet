@@ -1,7 +1,10 @@
 package com.josh.intranet.controller;
 
 import com.josh.intranet.dto.request.ContactDetailsRequestDto;
+import com.josh.intranet.exception.ValidationException;
 import com.josh.intranet.service.ContactDetailsServiceImpl;
+import com.josh.intranet.utils.ErrorUtils;
+import com.josh.intranet.utils.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -29,16 +32,11 @@ public class ContactDetailsController {
                                             BindingResult bindingResult){
     contactDetailsRequestDto.setEmployee_id(employee_id);
     if (bindingResult.hasErrors()) {
-      List<String> errorMessages = bindingResult.getFieldErrors().stream()
-          .map(FieldError::getDefaultMessage)
-          .collect(Collectors.toList());
-      Map<String, String> response = new HashMap<>();
-      response.put("message", errorMessages.toString());
-      return ResponseEntity.badRequest().body(response);
+      List<String> errorMessages = ErrorUtils.getErrorMessage(bindingResult);
+      throw new ValidationException(errorMessages);
     }
     contactDetailsService.createContactDetails(contactDetailsRequestDto);
-    Map<String, String> response = new HashMap<>();
-    response.put("message", "ContactDetails Added Successfully");
+    Map<String, String> response = ResponseUtils.createSuccessResponse("ContactDetails Added Successfully");
     return ResponseEntity.ok().body(response);
   }
 }
