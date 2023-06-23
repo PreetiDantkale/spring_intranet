@@ -1,5 +1,6 @@
 package com.josh.intranet.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,6 +35,7 @@ public class Timesheet {
   private Timestamp updatedAt;
 
   @ManyToOne
+  @JsonBackReference
   private EmployeeProject employeeProject;
 
 }

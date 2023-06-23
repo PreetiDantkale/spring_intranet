@@ -1,5 +1,6 @@
 package com.josh.intranet.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -49,5 +50,6 @@ public class PersonalDetails {
   private Timestamp updatedAt;
 
   @OneToOne
+  @JsonBackReference
   private Employee employee;
 }

@@ -1,6 +1,8 @@
 package com.josh.intranet.service;
 
+import com.josh.intranet.dto.request.AddressRequestDto;
 import com.josh.intranet.dto.request.ContactDetailsRequestDto;
+import com.josh.intranet.model.Address;
 import com.josh.intranet.model.ContactDetails;
 import com.josh.intranet.model.Employee;
 import com.josh.intranet.repository.ContactDetailsRepository;
@@ -34,4 +36,20 @@ public class ContactDetailsServiceImpl implements ContactDetailsService {
     contactDetails.setUpdatedAt(Timestamp.valueOf(timestamp));
     contactDetailsRepository.save(contactDetails);
   }
+
+  public ContactDetails updateContactDetails(ContactDetailsRequestDto contactDetailsRequestDto, Long id) throws Exception{
+    Optional<ContactDetails> optionalContactDetails = contactDetailsRepository.findById(id);
+    if (optionalContactDetails.isPresent()) {
+      ContactDetails contactDetails = optionalContactDetails.get();
+      contactDetails.setRelation(contactDetailsRequestDto.getRelation());
+      contactDetails.setContactNumber(contactDetailsRequestDto.getContact_number());
+      contactDetails.setName(contactDetailsRequestDto.getName());
+      ContactDetails updatedContactDetails = contactDetailsRepository.save(contactDetails);
+      return updatedContactDetails;
+    }
+    else{
+      throw new Exception("ContactDetails not found");
+    }
+  }
+
 }

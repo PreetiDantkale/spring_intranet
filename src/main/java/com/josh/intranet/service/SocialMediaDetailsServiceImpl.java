@@ -33,4 +33,18 @@ public class SocialMediaDetailsServiceImpl implements SocialMediaDetailsService 
     socialMediaDetails.setUpdatedAt(Timestamp.valueOf(timestamp));
     socialMediaDetailsRepository.save(socialMediaDetails);
   }
+
+  public SocialMediaDetails updateSocialMediaDetails(SocialMediaDetailsRequestDto socialMediaDetailsRequestDto, Long id) throws Exception {
+    Optional<SocialMediaDetails> optionalSocialMediaDetails = socialMediaDetailsRepository.findById(id);
+    if (optionalSocialMediaDetails.isPresent()) {
+      SocialMediaDetails socialMediaDetails = optionalSocialMediaDetails.get();
+      socialMediaDetails.setMediaHandle(socialMediaDetailsRequestDto.getMedia_handle());
+      socialMediaDetails.setMediaName(socialMediaDetailsRequestDto.getMedia_name());
+      SocialMediaDetails updatedSocialMediaDetails = socialMediaDetailsRepository.save(socialMediaDetails);
+      return updatedSocialMediaDetails;
+    } else {
+      throw new Exception("SocialMediaDetails not found");
+    }
+  }
+
 }

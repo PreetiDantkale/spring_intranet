@@ -1,5 +1,7 @@
 package com.josh.intranet.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -54,21 +56,27 @@ public class Employee {
   private Timestamp updatedAt;
 
   @OneToMany(mappedBy = "employee")
+  @JsonManagedReference
   private List<Address> addressList;
 
   @OneToMany(mappedBy = "employee")
+  @JsonManagedReference
   private List<ContactDetails> contactDetailsList;
 
   @OneToMany(mappedBy = "employee")
+  @JsonManagedReference
   private List<EmployeeProject> employeeProjectList;
 
   @OneToOne(mappedBy = "employee")
+  @JsonBackReference
   private PersonalDetails personalDetailsList;
 
   @OneToMany(mappedBy = "employee")
+  @JsonManagedReference
   private List<SocialMediaDetails> socialMediaDetailsList;
 
   @OneToOne(mappedBy = "employee")
+  @JsonBackReference
   private Skills skillsList;
 
 }

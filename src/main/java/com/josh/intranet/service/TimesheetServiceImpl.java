@@ -44,4 +44,18 @@ public class TimesheetServiceImpl implements TimesheetService {
       return false;
     }
   }
+
+  public Timesheet updateTimesheet(TimesheetRequestDto timesheetRequestDto, Long id) throws Exception {
+    Optional<Timesheet> optionalTimesheet = timesheetRepository.findById(id);
+    if (optionalTimesheet.isPresent()) {
+      Timesheet timesheet = optionalTimesheet.get();
+      timesheet.setHoursWorked(timesheetRequestDto.getHours_worked());
+      timesheet.setDescription(timesheetRequestDto.getDescription());
+      Timesheet updatedTimesheet = timesheetRepository.save(timesheet);
+      return updatedTimesheet;
+    } else {
+      throw new Exception("Timesheet not found");
+    }
+  }
+
 }

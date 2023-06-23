@@ -21,4 +21,5 @@ public class ContactDetailsRequestDto {
   @NotNull
   private String contact_number;
   private Long employee_id;
+
 }

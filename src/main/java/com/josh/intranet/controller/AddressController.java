@@ -41,7 +41,7 @@ public class AddressController {
   }
 
   @PutMapping("/api/v1/addresses/{id}")
-  public Address updateEmployee(@RequestBody Address address, @PathVariable("id") Long Id) throws Exception {
-    return addressService.updateAddress(address, Id);
+  public Address updateAddress(@RequestBody AddressRequestDto addressRequestDto, @PathVariable("id") Long Id) throws Exception {
+    return addressService.updateAddress(addressRequestDto, Id);
   }
 }

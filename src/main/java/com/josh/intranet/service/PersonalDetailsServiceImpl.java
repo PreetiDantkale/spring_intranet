@@ -1,5 +1,6 @@
 package com.josh.intranet.service;
 
+import com.josh.intranet.dto.request.EmployeeRequestDto;
 import com.josh.intranet.dto.request.PersonalDetailsRequestDto;
 import com.josh.intranet.model.PersonalDetails;
 import com.josh.intranet.model.Employee;
@@ -39,4 +40,24 @@ public class PersonalDetailsServiceImpl implements PersonalDetailsService {
     personalDetails.setUpdatedAt(Timestamp.valueOf(timestamp));
     personalDetailsRepository.save(personalDetails);
   }
+
+  public PersonalDetails updatePersonalDetails(PersonalDetailsRequestDto personalDetailsRequestDto, Long id) throws Exception {
+    Optional<PersonalDetails> optionalPersonalDetails = personalDetailsRepository.findById(id);
+    if (optionalPersonalDetails.isPresent()) {
+      PersonalDetails personalDetails = optionalPersonalDetails.get();
+      personalDetails.setDoj(personalDetailsRequestDto.getDoj());
+      personalDetails.setEmail(personalDetailsRequestDto.getEmail());
+      personalDetails.setExperience(personalDetailsRequestDto.getExperience());
+      personalDetails.setPanNumber(personalDetailsRequestDto.getPan_number());
+      personalDetails.setPassport(personalDetailsRequestDto.getPassport());
+      personalDetails.setPreviousCompany(personalDetailsRequestDto.getPrevious_company());
+      personalDetails.setQualification(personalDetailsRequestDto.getQualification());
+      personalDetails.setTShirtSize(personalDetailsRequestDto.getT_shirt_size());
+      PersonalDetails updatedPersonalDetails = personalDetailsRepository.save(personalDetails);
+      return updatedPersonalDetails;
+    } else {
+      throw new Exception("PersonalDetails not found");
+    }
+  }
+
 }

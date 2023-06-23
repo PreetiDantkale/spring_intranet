@@ -5,12 +5,14 @@ import com.josh.intranet.model.Address;
 import com.josh.intranet.model.Employee;
 import com.josh.intranet.repository.AddressRepository;
 import com.josh.intranet.repository.EmployeeRepository;
-import jakarta.validation.constraints.NotNull;
+//import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -20,6 +22,9 @@ public class AddressServiceImpl implements AddressService {
   AddressRepository addressRepository;
   @Autowired
   EmployeeRepository employeeRepository;
+
+//  @Autowired
+//  ModelMapper modelMapper;
 
   private LocalDateTime timestamp;
 
@@ -39,21 +44,21 @@ public class AddressServiceImpl implements AddressService {
     addressRepository.save(address);
   }
 
-  public Address updateAddress(Address updatedEmployee, Long id) throws Exception{
+  public Address updateAddress(AddressRequestDto addressRequestDto, Long id) throws Exception{
     Optional<Address> optionalAddress = addressRepository.findById(id);
     if (optionalAddress.isPresent()) {
       Address address = optionalAddress.get();
-      address.setLocation(updatedEmployee.getLocation());
-      address.setContactNumber(updatedEmployee.getContactNumber());
-      address.setCity(updatedEmployee.getCity());
-      address.setState(updatedEmployee.getState());
-      address.setPinCode(updatedEmployee.getPinCode());
-      address.setPermanent(updatedEmployee.isPermanent());
+      address.setLocation(addressRequestDto.getLocation());
+      address.setContactNumber(addressRequestDto.getContact_number());
+      address.setCity(addressRequestDto.getCity());
+      address.setState(addressRequestDto.getState());
+      address.setPinCode(addressRequestDto.getPin_code());
+      address.setPermanent(addressRequestDto.is_permanent());
       Address updatedAddress = addressRepository.save(address);
       return updatedAddress;
     }
     else{
-      throw new Exception("User not found");
+      throw new Exception("Address not found");
     }
   }
 

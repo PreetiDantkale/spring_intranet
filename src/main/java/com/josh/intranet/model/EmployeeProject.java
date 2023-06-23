@@ -1,5 +1,6 @@
 package com.josh.intranet.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,10 +28,12 @@ public class EmployeeProject {
   private Timestamp updatedAt;
 
   @ManyToOne
+  @JsonBackReference
   @JoinColumn(name = "employee_id")
   private Employee employee;
 
   @ManyToOne
+  @JsonBackReference
   @JoinColumn(name = "project_id")
   private Project project;
 }

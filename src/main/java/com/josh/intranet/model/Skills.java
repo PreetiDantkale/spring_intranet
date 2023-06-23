@@ -1,6 +1,7 @@
 package com.josh.intranet.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,6 +41,7 @@ public class Skills {
   private Timestamp updatedAt;
 
   @OneToOne
+  @JsonBackReference
   private Employee employee;
 
   public static final Map<String, String> SKILLS;

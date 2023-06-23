@@ -35,4 +35,20 @@ public class SkillsServiceImpl implements SkillsService {
     skills.setUpdatedAt(Timestamp.valueOf(timestamp));
     skillsRepository.save(skills);
   }
+
+  public Skills updateSkills(SkillsRequestDto skillsRequestDto, Long id) throws Exception {
+    Optional<Skills> optionalSkills = skillsRepository.findById(id);
+    if (optionalSkills.isPresent()) {
+      Skills skills = optionalSkills.get();
+      skills.setPrimarySkill(skillsRequestDto.getPrimary_skill());
+      skills.setSecondarySkill(skillsRequestDto.getSecondary_skill());
+      skills.setTernarySkill(skillsRequestDto.getTernary_skill());
+      skills.setOtherSkill(skillsRequestDto.getOther_skill());
+      Skills updatedSkills = skillsRepository.save(skills);
+      return updatedSkills;
+    } else {
+      throw new Exception("Skills not found");
+    }
+  }
+
 }

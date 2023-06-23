@@ -1,7 +1,10 @@
 package com.josh.intranet.controller;
 
+import com.josh.intranet.dto.request.AddressRequestDto;
 import com.josh.intranet.dto.request.PersonalDetailsRequestDto;
 import com.josh.intranet.exception.ValidationException;
+import com.josh.intranet.model.Address;
+import com.josh.intranet.model.PersonalDetails;
 import com.josh.intranet.service.PersonalDetailsServiceImpl;
 import com.josh.intranet.utils.ErrorUtils;
 import com.josh.intranet.utils.ResponseUtils;
@@ -10,10 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,5 +38,10 @@ public class PersonalDetailsController {
     personalDetailsService.createPersonalDetails(personalDetailsRequestDto);
     Map<String, String> response = ResponseUtils.createSuccessResponse("Personal Details Added Successfully");
     return ResponseEntity.ok().body(response);
+  }
+
+  @PutMapping("/api/v1/personal_details/{id}")
+  public PersonalDetails updatePersonalDetails(@RequestBody PersonalDetailsRequestDto personalDetailsRequestDto, @PathVariable("id") Long Id) throws Exception {
+    return personalDetailsService.updatePersonalDetails(personalDetailsRequestDto, Id);
   }
 }
