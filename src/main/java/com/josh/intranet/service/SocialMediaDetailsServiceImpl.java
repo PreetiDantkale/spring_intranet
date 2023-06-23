@@ -47,4 +47,14 @@ public class SocialMediaDetailsServiceImpl implements SocialMediaDetailsService 
     }
   }
 
+  public SocialMediaDetails getSocialMediaDetails(Long userId) throws Exception {
+    Optional<SocialMediaDetails> optional = socialMediaDetailsRepository.findById(userId);
+    if (optional.isPresent()) {
+      return optional.get();
+    } else {
+      throw new Exception("SocialMediaDetails not found");
+    }
+  }
+
+
 }

@@ -42,4 +42,10 @@ public class RoleController {
   public Role updateRole(@RequestBody RoleRequestDto roleRequestDto, @PathVariable("id") Long Id) throws Exception {
     return roleService.updateRole(roleRequestDto, Id);
   }
+
+  @GetMapping("/api/v1/roles/{id}")
+  public Role getRole(@PathVariable("id") Long id) throws Exception {
+    return roleService.getRole(id);
+  }
+
 }

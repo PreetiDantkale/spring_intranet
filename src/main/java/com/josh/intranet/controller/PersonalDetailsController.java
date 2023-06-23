@@ -44,4 +44,10 @@ public class PersonalDetailsController {
   public PersonalDetails updatePersonalDetails(@RequestBody PersonalDetailsRequestDto personalDetailsRequestDto, @PathVariable("id") Long Id) throws Exception {
     return personalDetailsService.updatePersonalDetails(personalDetailsRequestDto, Id);
   }
+
+  @GetMapping("/api/v1/personal-details/{id}")
+  public PersonalDetails getPersonalDetails(@PathVariable("id") Long id) throws Exception {
+    return personalDetailsService.getPersonalDetails(id);
+  }
+
 }

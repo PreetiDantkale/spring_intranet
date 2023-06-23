@@ -44,4 +44,10 @@ public class SocialMediaDetailsController {
   public SocialMediaDetails updateSocialMediaDetails(@RequestBody SocialMediaDetailsRequestDto socialMediaDetailsRequestDto, @PathVariable("id") Long Id) throws Exception {
     return socialMediaDetailsService.updateSocialMediaDetails(socialMediaDetailsRequestDto, Id);
   }
+
+  @GetMapping("/api/v1/social-media-details/{id}")
+  public SocialMediaDetails getSocialMediaDetails(@PathVariable("id") Long id) throws Exception {
+    return socialMediaDetailsService.getSocialMediaDetails(id);
+  }
+
 }

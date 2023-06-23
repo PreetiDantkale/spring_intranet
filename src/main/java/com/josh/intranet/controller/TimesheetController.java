@@ -51,4 +51,10 @@ public class TimesheetController {
   public Timesheet updateTimesheet(@RequestBody TimesheetRequestDto timesheetRequestDto, @PathVariable("id") Long Id) throws Exception {
     return timesheetService.updateTimesheet(timesheetRequestDto, Id);
   }
+
+  @GetMapping("/api/v1/timesheets/{id}")
+  public Timesheet getTimesheet(@PathVariable("id") Long id) throws Exception {
+    return timesheetService.getTimesheet(id);
+  }
+
 }

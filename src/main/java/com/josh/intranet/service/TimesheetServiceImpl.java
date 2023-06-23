@@ -58,4 +58,14 @@ public class TimesheetServiceImpl implements TimesheetService {
     }
   }
 
+  public Timesheet getTimesheet(Long userId) throws Exception {
+    Optional<Timesheet> optional = timesheetRepository.findById(userId);
+    if (optional.isPresent()) {
+      return optional.get();
+    } else {
+      throw new Exception("Timesheet not found");
+    }
+  }
+
+
 }

@@ -60,4 +60,14 @@ public class PersonalDetailsServiceImpl implements PersonalDetailsService {
     }
   }
 
+  public PersonalDetails getPersonalDetails(Long userId) throws Exception {
+    Optional<PersonalDetails> optional = personalDetailsRepository.findById(userId);
+    if (optional.isPresent()) {
+      return optional.get();
+    } else {
+      throw new Exception("PersonalDetails not found");
+    }
+  }
+
+
 }

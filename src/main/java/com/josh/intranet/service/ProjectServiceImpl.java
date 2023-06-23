@@ -43,4 +43,14 @@ public class ProjectServiceImpl implements ProjectService {
     }
   }
 
+  public Project getProject(Long userId) throws Exception {
+    Optional<Project> optional = projectRepository.findById(userId);
+    if (optional.isPresent()) {
+      return optional.get();
+    } else {
+      throw new Exception("Project not found");
+    }
+  }
+
+
 }

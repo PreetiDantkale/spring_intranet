@@ -44,4 +44,10 @@ public class AddressController {
   public Address updateAddress(@RequestBody AddressRequestDto addressRequestDto, @PathVariable("id") Long Id) throws Exception {
     return addressService.updateAddress(addressRequestDto, Id);
   }
+
+  @GetMapping("/api/v1/addresses/{id}")
+  public Address getAddress(@PathVariable("id") Long id) throws Exception {
+    return addressService.getAddress(id);
+  }
+
 }

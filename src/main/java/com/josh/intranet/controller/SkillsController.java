@@ -44,4 +44,10 @@ public class SkillsController {
   public Skills updateSkills(@RequestBody SkillsRequestDto skillsRequestDto, @PathVariable("id") Long Id) throws Exception {
     return skillsService.updateSkills(skillsRequestDto, Id);
   }
+
+  @GetMapping("/api/v1/skills/{id}")
+  public Skills getSkills(@PathVariable("id") Long id) throws Exception {
+    return skillsService.getSkills(id);
+  }
+
 }

@@ -44,4 +44,10 @@ public class ContactDetailsController {
   public ContactDetails updateContactDetails(@RequestBody ContactDetailsRequestDto contactDetailsRequestDto, @PathVariable("id") Long Id) throws Exception {
     return contactDetailsService.updateContactDetails(contactDetailsRequestDto, Id);
   }
+
+  @GetMapping("/api/v1/contact-details/{id}")
+  public ContactDetails getContactDetails(@PathVariable("id") Long id) throws Exception {
+    return contactDetailsService.getContactDetails(id);
+  }
+
 }

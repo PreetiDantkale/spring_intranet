@@ -58,4 +58,9 @@ public class EmployeeController {
   public Employee updateEmployee(@RequestBody EmployeeRequestDto employeeRequestDto, @PathVariable("id") Long Id) throws Exception {
     return employeeService.updateEmployee(employeeRequestDto, Id);
   }
+
+  @GetMapping("/api/v1/employees/{id}")
+  public Employee getEmployee(@PathVariable("id") Long id) throws Exception {
+    return employeeService.getEmployee(id);
+  }
 }

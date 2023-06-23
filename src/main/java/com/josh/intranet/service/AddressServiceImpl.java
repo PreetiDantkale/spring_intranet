@@ -62,4 +62,13 @@ public class AddressServiceImpl implements AddressService {
     }
   }
 
+  public Address getAddress(Long userId) throws Exception {
+    Optional<Address> optional = addressRepository.findById(userId);
+    if (optional.isPresent()) {
+      return optional.get();
+    } else {
+      throw new Exception("Address not found");
+    }
+  }
+
 }

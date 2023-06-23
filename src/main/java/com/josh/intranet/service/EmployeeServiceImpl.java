@@ -52,6 +52,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
   }
 
+  public Employee getEmployee(Long userId) throws Exception {
+    Optional<Employee> optional = employeeRepository.findById(userId);
+    if(optional.isPresent()){
+      return optional.get();
+    }
+    else{
+      throw new Exception("Employee not found");
+    }
+  }
+
 
   private
   String createEmail(String firstName, String lastName){

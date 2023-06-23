@@ -43,4 +43,10 @@ public class ProjectController {
   public Project updateProject(@RequestBody ProjectRequestDto projectRequestDto, @PathVariable("id") Long Id) throws Exception {
     return projectService.updateProject(projectRequestDto, Id);
   }
+
+  @GetMapping("/api/v1/projects/{id}")
+  public Project getProject(@PathVariable("id") Long id) throws Exception {
+    return projectService.getProject(id);
+  }
+
 }

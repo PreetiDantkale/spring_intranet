@@ -52,4 +52,13 @@ public class ContactDetailsServiceImpl implements ContactDetailsService {
     }
   }
 
+  public ContactDetails getContactDetails(Long userId) throws Exception {
+    Optional<ContactDetails> optional = contactDetailsRepository.findById(userId);
+    if (optional.isPresent()) {
+      return optional.get();
+    } else {
+      throw new Exception("ContactDetails not found");
+    }
+  }
+
 }

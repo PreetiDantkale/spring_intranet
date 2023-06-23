@@ -51,4 +51,13 @@ public class SkillsServiceImpl implements SkillsService {
     }
   }
 
+  public Skills getSkills(Long userId) throws Exception {
+    Optional<Skills> optional = skillsRepository.findById(userId);
+    if (optional.isPresent()) {
+      return optional.get();
+    } else {
+      throw new Exception("Skills not found");
+    }
+  }
+
 }

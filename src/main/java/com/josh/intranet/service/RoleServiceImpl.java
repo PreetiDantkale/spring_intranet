@@ -43,6 +43,13 @@ public class RoleServiceImpl implements RoleService {
     }
   }
 
-
+  public Role getRole(Long userId) throws Exception {
+    Optional<Role> optional = roleRepository.findById(userId);
+    if (optional.isPresent()) {
+      return optional.get();
+    } else {
+      throw new Exception("Role not found");
+    }
+  }
 
 }
