@@ -38,4 +38,23 @@ public class AddressServiceImpl implements AddressService {
     address.setUpdatedAt(Timestamp.valueOf(timestamp));
     addressRepository.save(address);
   }
+
+  public Address updateAddress(Address updatedEmployee, Long id) throws Exception{
+    Optional<Address> optionalAddress = addressRepository.findById(id);
+    if (optionalAddress.isPresent()) {
+      Address address = optionalAddress.get();
+      address.setLocation(updatedEmployee.getLocation());
+      address.setContactNumber(updatedEmployee.getContactNumber());
+      address.setCity(updatedEmployee.getCity());
+      address.setState(updatedEmployee.getState());
+      address.setPinCode(updatedEmployee.getPinCode());
+      address.setPermanent(updatedEmployee.isPermanent());
+      Address updatedAddress = addressRepository.save(address);
+      return updatedAddress;
+    }
+    else{
+      throw new Exception("User not found");
+    }
+  }
+
 }
